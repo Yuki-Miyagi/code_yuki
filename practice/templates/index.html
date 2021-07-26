@@ -1,0 +1,42 @@
+  
+{% extends "layout.html" %}
+
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buy in buy_list %}
+            <tr>
+                <td>{{buy["symbol"]}}</td>
+                <td>{{buy["name"]}}</td>
+                <td>{{buy["shares"]}}</td>
+                <td>{{buy["price"]}}</td>
+                <td>{{buy["total"]}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>CASH</td>
+                <td colspan = 3></td>
+                <td>{{ cash }}</td>
+            </tr>
+        </tbody>
+        <tfooter>
+            <tr>
+                <td colspan = 4></td>
+                <td>{{ amount }}</td>
+            </tr>
+        </tfooter>
+   </table>
+{% endblock %}
