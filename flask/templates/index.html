@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <meta name = "viewport" content = "initial-scale = 1, width = device-width">
+
+        <link rel = "stylesheet" href="/static/style.css">
+
+        <title>Final_project</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1 class="header-title">今日の夕飯</h1>
+        </header>
+        <div class="main">
+            <div class="content">
+                <p class = "dinasour"><img src = "/static/dinosaur.png"></p>
+                <div class="balloon">
+                    <p class="balloon-header">～本日のおすすめ～</p>
+                    <ul>
+                        {% for menu in menu_list %}
+                        <li class="osusume">
+                            <p class="osusume-menu" name="item">{{menu}}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="menu_select">
+                        <form action="/search" method="post">
+                            <select name="item">
+                                {% for menu in menu_list %}
+                                <option>{{menu}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" value="検索">
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <nav class="nav">
+                <div id = "list"><button><p>リストを見る</p></buttun></div>
+                <div id = "add"><button><p>追加する</p></buttun></div>
+                <div id = "delete"><button><p>削除する</p></button></buttun></div>
+            </nav>
+        </div>
+        <div class="modal-wrapper" id="list-show">
+            <div class="modal">
+                <div class="close-modal">
+                    <i class="fa fa-2x fa-times"></i>
+                </div>
+                <h2>メニューリスト</h2>
+                <p class="limit-3">※リストには最低３つの料理が必要です</p>
+                  <ul>
+                      {% for each in all_list%}
+                        <li class="all_list">{{each}}</li>
+                      {% endfor %}
+                  </ul>
+            </div>
+        </div>
+
+        <div class="modal-wrapper" id="add-show">
+            <div class="modal">
+                <div class="close-modal">
+                    <i class="fa fa-2x fa-times"></i>
+                </div>
+                <h2>追加したい料理名を入力してください</h2>
+                <form action="/add" method="POST", autocomplete = "off">
+                  <input class="form-control" type="text" name="add_menu" placeholder="料理名">
+                  <div id="submit-btn"><button>追加する</button></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-wrapper" id="delete-show">
+            <div class="modal">
+                <div class="close-modal">
+                    <i class="fa fa-2x fa-times"></i>
+                </div>
+                <h2>削除したい料理名を正確に入力してください</h2>
+                <form action="/delete" method="POST", autocomplete = "off">
+                  <input class="form-control" type="text" name ="delete_menu" placeholder="料理名">
+                  <div id="submit-btn"><button>削除する</button></div>
+                </form>
+            </div>
+        </div>
+
+        <script src="/static/jQuery.js"></script>
+    </body>
+</html>
